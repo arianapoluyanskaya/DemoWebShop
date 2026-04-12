@@ -1,26 +1,15 @@
 package com.demowebshop.tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
+public class FindElementsTests extends TestBase{
 
-public class FindElementsTests {
-
-    WebDriver driver;
-
-    @BeforeMethod
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.get("https://demowebshop.tricentis.com/");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        //driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+    @Test
+    public void isLogoImgPresentTest(){
+        System.out.println("Logo image is " + isLogoImgPresent());
+        //Assert.assertTrue(isLogoImgPresent());
     }
 
     @Test
@@ -151,12 +140,6 @@ public class FindElementsTests {
         // 12. by attribute starts with
         WebElement top_menu_link = driver.findElement(By.cssSelector("a[href^='/apparel']"));
         System.out.println(top_menu_link.getText());
-    }
-
-    @AfterMethod(enabled = false)
-    public void tearDown() {
-        driver.quit();
-
     }
 
 }
