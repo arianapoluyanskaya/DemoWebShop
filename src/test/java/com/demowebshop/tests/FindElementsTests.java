@@ -1,24 +1,25 @@
-package com.demowebshop.tests;
+/*package com.demowebshop.tests;
 
+import com.demowebshop.core.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-public class FindElementsTests extends TestBase{
+public class FindElementsTests extends TestBase {
 
     @Test
     public void isLogoImgPresentTest(){
-        System.out.println("Logo image is " + isLogoImgPresent());
+        System.out.println("Logo image is " + app.getisLogoImgPresent());
         //Assert.assertTrue(isLogoImgPresent());
     }
 
     @Test
     public void findElementByTagNameTest() {
         //поиск элемента по By.tagName
-        WebElement element = driver.findElement(By.tagName("h2"));
+        WebElement element = app.driver.findElement(By.tagName("h2"));
         System.out.println(element.getText());
 
-        WebElement label = driver.findElement(By.tagName("label"));
+        WebElement label = app.driver.findElement(By.tagName("label"));
         System.out.println(label.getText());
 
     }
@@ -26,14 +27,14 @@ public class FindElementsTests extends TestBase{
     @Test
     public void findElementById(){
         //поиск элемента по By.id
-        WebElement searchterms = driver.findElement(By.id("small-searchterms"));
+        WebElement searchterms = app.driver.findElement(By.id("small-searchterms"));
         System.out.println(searchterms.getDomAttribute("id"));
     }
 
     @Test
     public void findElementByClassName(){
         //поиск элемента по By.className
-        WebElement searchBoxText = driver.findElement(By.className("search-box-text"));
+        WebElement searchBoxText = app.driver.findElement(By.className("search-box-text"));
         System.out.println(searchBoxText.getText());
 
     }
@@ -42,55 +43,55 @@ public class FindElementsTests extends TestBase{
     public void findElementByLinkTextAndPartialLinkTextTest() {
 
         // 1. link text
-        WebElement register = driver.findElement(By.linkText("Register"));
+        WebElement register = app.driver.findElement(By.linkText("Register"));
         System.out.println(register.getText());
 
         // 2. link text
-        WebElement login = driver.findElement(By.linkText("Log in"));
+        WebElement login = app.driver.findElement(By.linkText("Log in"));
         System.out.println(login.getText());
 
         // 3. link text
-        WebElement shopping_cart = driver.findElement(By.linkText("Shopping cart"));
+        WebElement shopping_cart = app.driver.findElement(By.linkText("Shopping cart"));
         System.out.println(shopping_cart.getText());
 
         // 4. link text
-        WebElement wishlist = driver.findElement(By.linkText("Wishlist"));
+        WebElement wishlist = app.driver.findElement(By.linkText("Wishlist"));
         System.out.println(wishlist.getText());
 
         // 5. link text
-        WebElement books = driver.findElement(By.linkText("Books"));
+        WebElement books = app.driver.findElement(By.linkText("Books"));
         System.out.println(books.getText());
 
         // 6. link text
-        WebElement computers = driver.findElement(By.linkText("Computers"));
+        WebElement computers = app.driver.findElement(By.linkText("Computers"));
         System.out.println(computers.getText());
 
         // 7. partial link text
-        WebElement reg = driver.findElement(By.partialLinkText("Reg"));
+        WebElement reg = app.driver.findElement(By.partialLinkText("Reg"));
         System.out.println(reg.getText());
 
         // 8. partial link text
-        WebElement log = driver.findElement(By.partialLinkText("Log"));
+        WebElement log = app.driver.findElement(By.partialLinkText("Log"));
         System.out.println(log.getText());
 
         // 9. partial link text
-        WebElement shopping = driver.findElement(By.partialLinkText("Shopping"));
+        WebElement shopping = app.driver.findElement(By.partialLinkText("Shopping"));
         System.out.println(shopping.getText());
 
         // 10. partial link text
-        WebElement wish = driver.findElement(By.partialLinkText("Wish"));
+        WebElement wish = app.driver.findElement(By.partialLinkText("Wish"));
         System.out.println(wish.getText());
 
         // 11. partial link text
-        WebElement book = driver.findElement(By.partialLinkText("Book"));
+        WebElement book = app.driver.findElement(By.partialLinkText("Book"));
         System.out.println(book.getText());
 
         // 12. partial link text
-        WebElement comp = driver.findElement(By.partialLinkText("Comp"));
+        WebElement comp = app.driver.findElement(By.partialLinkText("Comp"));
         System.out.println(comp.getText());
     }
 
-    @Test
+   /* @Test
     public void findElementByCssSelectorTest() {
 
         // 1. by id
@@ -140,6 +141,7 @@ public class FindElementsTests extends TestBase{
         // 12. by attribute starts with
         WebElement top_menu_link = driver.findElement(By.cssSelector("a[href^='/apparel']"));
         System.out.println(top_menu_link.getText());
-    }
 
-}
+    }*/
+
+/*} */

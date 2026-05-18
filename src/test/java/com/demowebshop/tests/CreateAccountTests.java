@@ -1,54 +1,51 @@
 package com.demowebshop.tests;
 
-import org.openqa.selenium.By;
+import com.demowebshop.core.TestBase;
+import com.demowebshop.data.UserData;
+import com.demowebshop.models.User;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class CreateAccountTests extends TestBase{
+public class CreateAccountTests extends TestBase {
+
+    @BeforeMethod
+    public void ensurePrecondition(){
+        if (!app.getUser().isLoginLinkPresent()){
+            app.getUser().clickOnSignOutButton();
+        }
+    }
 
     @Test
     public void newUserRegisterPositiveTest(){
         int i = (int)((System.currentTimeMillis()/1000)%3600);
 
-        //click on register link
-        click(By.cssSelector("a.ico-register"));
-        //choose gender
-        click(By.id("gender-female"));
-        //enter first name
-        type(By.name("FirstName"), "Arina");
-        //enter last name
-        type(By.name("LastName"), "Poluyanskaya");
-        //enter email
-        type(By.name("Email"), "arina.poluyanskaya" + i + "@yandex.ru");
-        //enter password
-        type(By.name("Password"), "password");
-        //confirm password
-        type(By.name("ConfirmPassword"), "password");
-        //click on register button
-        click(By.name("register-button"));
-        Assert.assertTrue(isElementPresent(By.cssSelector("a.ico-logout")));
+        app.getUser().clickOnRegisterLink();
+        app.getUser().fillRegisterForm(new User()
+                .setFirstName(UserData.firstName)
+                .setLastName(UserData.lastName)
+                .setEmail(UserData.emailPrefix + i + UserData.emailDomain)
+                .setPassword(UserData.password));
+        app.getUser().clickOnRegistrationButton();
+        Assert.assertTrue(app.getUser().isLogOutButtonPresent());
     }
+
 
     @Test
     public void existedUserRegisterNegativeTest(){
-
-        //click on register link
-        click(By.cssSelector("a.ico-register"));
-        //choose gender
-        click(By.id("gender-female"));
-        //enter first name
-        type(By.name("FirstName"), "Arina");
-        //enter last name
-        type(By.name("LastName"), "Poluyanskaya");
-        //enter email
-        type(By.name("Email"), "arina.poluyanskaya@yandex.ru");
-        //enter password
-        type(By.name("Password"), "password");
-        //confirm password
-        type(By.name("ConfirmPassword"), "password");
-        //click on register button
-        click(By.name("register-button"));
-        Assert.assertTrue(isAlertPresent());
+        
+        app.getUser().clickOnRegisterLink();
+        app.getUser().fillRegisterForm(new User()
+                .setFirstName(UserData.firstName)
+                .setLastName(UserData.lastName)
+                .setEmail(UserData.email)
+                .setPassword(UserData.password));
+        app.getUser().clickOnRegistrationButton();
+        Assert.assertTrue(app.getUser().isErrorMessagePresent());
     }
+
+    /*public boolean isErrorMessagePresent() {
+        return driver.findElement(By.cssSelector(".message-error")).getText().contains("The specified email already exists");
+    }*/
 
 }

@@ -1,24 +1,30 @@
 package com.demowebshop.tests;
 
-import org.openqa.selenium.By;
+import com.demowebshop.core.TestBase;
+import com.demowebshop.data.UserData;
+import com.demowebshop.models.User;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class LoginTests extends TestBase{
+public class LoginTests extends TestBase {
+
+    @BeforeMethod
+    public void ensurePrecondition(){
+        if (!app.getUser().isLoginLinkPresent()){
+            app.getUser().clickOnSignOutButton();
+        }
+    }
 
     @Test
     public void loginPositiveTest(){
 
-        click(By.cssSelector("a.ico-login"));
-
-        //enter email
-        type(By.name("Email"), "arina.poluyanskaya@yandex.ru");
-        //enter password
-        type(By.name("Password"), "password");
-
-        //click on login button
-        click(By.cssSelector("input.login-button"));
-        Assert.assertTrue(isElementPresent(By.cssSelector("a.ico-logout")));
+        app.getUser().clickOnLoginLink();
+        app.getUser().fillLoginForm(new User()
+                .setEmail(UserData.email)
+                .setPassword(UserData.password));
+        app.getUser().clickOnLoginButton();
+        Assert.assertTrue(app.getUser().isLogOutButtonPresent());
 
     }
 
