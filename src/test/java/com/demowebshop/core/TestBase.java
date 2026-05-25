@@ -12,6 +12,7 @@ package com.demowebshop.core;
 import org.openqa.selenium.remote.Browser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -38,9 +39,21 @@ public class TestBase {
     public void startTest(){
         logger.info("Start test");
     }
-    @AfterMethod
+    /*@AfterMethod
     public void stopTest(){
         logger.info("Stop test");
+    }*/
+    @AfterMethod(enabled = true)
+    public void tearDown(ITestResult result) {
+        if(result.isSuccess()) {
+            logger.info("PASSED: {}", result.getMethod().getMethodName());
+        } else {
+            logger.error("FAILD: {}. Screenshot - > {}", result.getMethod().getMethodName(),
+                    app.getUser().takeScreenshot());
+        }
+        logger.info("Stop test");
+        logger.info("*****************************");
+        app.stop();
     }
 
 }

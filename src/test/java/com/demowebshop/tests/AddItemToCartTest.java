@@ -35,6 +35,8 @@ public class AddItemToCartTest extends TestBase {
 
     }
 
+
+
     @AfterMethod
     public void postConditions() {
         app.getItem().deleteAddedItem();

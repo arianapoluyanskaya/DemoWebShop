@@ -16,7 +16,7 @@ public class ItemHelper extends BaseHelper {
     }
 
     public void clickOnShoppingCartLink() {
-        click(By.cssSelector("a.ico-cart"));
+        click(By.cssSelector("#topcartlink [href='/cart']"));
     }
 
     public String getCartItemName() {
