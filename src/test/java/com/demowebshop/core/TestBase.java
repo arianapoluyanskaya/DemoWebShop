@@ -32,28 +32,34 @@ public class TestBase {
     //@AfterMethod(enabled = false)
     @AfterSuite
     public void tearDown() {
+        // hier ist es richtig, schließe die Umgebung am Ende
         app.stop();
     }
 
     @BeforeMethod
-    public void startTest(){
-        logger.info("Start test");
+    public void startTest(ITestResult result){
+        // den Namen des tests mit in Logs speichern
+        logger.info("Start test: {}", result.getMethod().getMethodName());
     }
+
     /*@AfterMethod
     public void stopTest(){
         logger.info("Stop test");
     }*/
+
     @AfterMethod(enabled = true)
     public void tearDown(ITestResult result) {
         if(result.isSuccess()) {
             logger.info("PASSED: {}", result.getMethod().getMethodName());
         } else {
-            logger.error("FAILD: {}. Screenshot - > {}", result.getMethod().getMethodName(),
+            logger.error("FAILED: {}. Screenshot - > {}", result.getMethod().getMethodName(),
                     app.getUser().takeScreenshot());
         }
         logger.info("Stop test");
         logger.info("*****************************");
-        app.stop();
+        // app.stop() hier war falsch. 
+        // Es schließt den Browser/die Session nach jedem Test und die anderen Tests können es nicht nutzen.
+        // Führt zu NoSuchSessionException
     }
 
 }
