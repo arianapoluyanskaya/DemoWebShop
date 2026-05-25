@@ -32,15 +32,23 @@ public class BaseHelper {
         driver.findElement(locator).click();
     }
 
-    public String takeScreenshot(){
-        File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        File screen = new File("screenshots/screen-" + System.currentTimeMillis() + ".png");
+    public String takeScreenshot() {
+    File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
-        try {
-            Files.copy(tmp,screen);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return screen.getAbsolutePath();
+    // stelle sicher, dass es den Pfad gibt
+    File screenshotsDir = new File("screenshots");
+    if (!screenshotsDir.exists()) {
+        screenshotsDir.mkdirs();
     }
+
+    File screen = new File(screenshotsDir, "screen-" + System.currentTimeMillis() + ".png");
+
+    try {
+        Files.copy(tmp, screen);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+
+    return screen.getAbsolutePath();
+}
 }

@@ -15,7 +15,7 @@ public class FindElementsTests extends TestBase {
 
     @Test
     public void findElementByTagNameTest() {
-        //поиск элемента по By.tagName
+        // Find element by tag name
         WebElement element = app.driver.findElement(By.tagName("h2"));
         System.out.println(element.getText());
 
@@ -26,14 +26,14 @@ public class FindElementsTests extends TestBase {
 
     @Test
     public void findElementById(){
-        //поиск элемента по By.id
+        // Find element by ID
         WebElement searchterms = app.driver.findElement(By.id("small-searchterms"));
         System.out.println(searchterms.getDomAttribute("id"));
     }
 
     @Test
     public void findElementByClassName(){
-        //поиск элемента по By.className
+        // Find element by class name
         WebElement searchBoxText = app.driver.findElement(By.className("search-box-text"));
         System.out.println(searchBoxText.getText());
 
@@ -142,6 +142,7 @@ public class FindElementsTests extends TestBase {
         WebElement top_menu_link = driver.findElement(By.cssSelector("a[href^='/apparel']"));
         System.out.println(top_menu_link.getText());
 
-    }*/
+    }
 
-/*} */
+} 
+*/
